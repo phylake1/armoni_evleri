@@ -1,73 +1,45 @@
-import Link from "next/link";
+import ArmoniLogo from "./ArmoniLogo";
 import { CONTACT, PARENT } from "@/lib/site";
 
 export default function Footer() {
   return (
-    <footer className="bg-neutral-950 text-white/70">
-      <div className="container-page grid gap-10 py-14 md:grid-cols-3">
-        <div>
-          <p className="font-stapel text-2xl tracking-wide text-white">
-            <span className="font-medium">ARMONİ </span>
-            <span className="font-light">EVLERİ</span>
-          </p>
-          <p className="mt-4 max-w-xs text-sm">
-            Mesby Yapı&apos;nın konut projesi. Kat planları ve güncel satış
-            durumu bu sayfada.
-          </p>
+    <footer className="bg-espresso text-paper/70">
+      <div className="container-page py-16 lg:py-20">
+        <div className="flex flex-wrap items-center gap-6">
           <a
             href={PARENT.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-5 inline-block text-sm font-semibold text-white underline-offset-4 hover:underline"
+            className="font-stapel text-2xl tracking-wide text-paper/85"
           >
-            {PARENT.name} →
+            MESBY YAPI
           </a>
+          <span aria-hidden className="h-8 w-px bg-paper/30" />
+          <ArmoniLogo className="h-5 w-auto text-paper" />
         </div>
 
-        <div>
-          <h3 className="text-xs font-semibold uppercase tracking-widest text-white">
-            Hızlı Bağlantılar
-          </h3>
-          <ul className="mt-4 space-y-2 text-sm">
-            <li>
-              <Link href="/#genel-bakis" className="hover:text-white">
-                Genel Bakış
-              </Link>
-            </li>
-            <li>
-              <Link href="/#kat-planlari" className="hover:text-white">
-                Kat Planları
-              </Link>
-            </li>
-            <li>
-              <Link href="/#iletisim" className="hover:text-white">
-                İletişim
-              </Link>
-            </li>
-          </ul>
+        <div className="mt-10 grid gap-10 text-sm leading-relaxed lg:grid-cols-12">
+          <p className="max-w-md lg:col-span-5">
+            Mesby Yapı, 2016 yılından bu yana Türkiye genelinde konut ve gayrimenkul
+            geliştirme alanında faaliyet gösteren bir inşaat firmasıdır. Armoni Evleri
+            Mesby Yapı projesidir.
+          </p>
+          <address className="not-italic lg:col-span-4 lg:col-start-7">
+            {CONTACT.address}
+            <br />
+            <a href={`mailto:${CONTACT.email}`} className="hover:text-paper">
+              {CONTACT.email}
+            </a>
+            <br />
+            <a href={CONTACT.phoneHref} className="hover:text-paper">
+              {CONTACT.phoneDisplay}
+            </a>
+          </address>
         </div>
 
-        <div>
-          <h3 className="text-xs font-semibold uppercase tracking-widest text-white">
-            İletişim
-          </h3>
-          <ul className="mt-4 space-y-2 text-sm">
-            <li>{CONTACT.address}</li>
-            <li>
-              <a href={`mailto:${CONTACT.email}`} className="hover:text-white">
-                {CONTACT.email}
-              </a>
-            </li>
-            <li>
-              <a href={CONTACT.phoneHref} className="hover:text-white">
-                {CONTACT.phoneDisplay}
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div className="border-t border-white/10 py-5 text-center text-xs">
-        © {new Date().getFullYear()} {PARENT.name}. Tüm hakları saklıdır.
+        <p className="mt-14 border-t border-paper/15 pt-6 text-xs">
+          © {new Date().getFullYear()} {PARENT.name}. Tüm hakları saklıdır.
+        </p>
       </div>
     </footer>
   );

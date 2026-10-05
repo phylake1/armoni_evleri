@@ -15,13 +15,11 @@ export default function Lightbox({
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKeyDown);
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("keydown", onKey);
     };
   }, [onClose]);
 
@@ -30,15 +28,15 @@ export default function Lightbox({
       role="dialog"
       aria-modal="true"
       aria-label={title}
-      className="fixed inset-0 z-[60] flex flex-col bg-black/95 backdrop-blur-sm"
+      className="fixed inset-0 z-[60] flex flex-col bg-espresso/95 backdrop-blur-sm"
     >
-      <div className="flex items-center justify-between gap-4 px-4 py-3 text-white sm:px-6">
-        <p className="truncate text-sm font-medium">{title}</p>
-        <div className="flex items-center gap-2">
+      <div className="flex items-center justify-between gap-4 px-4 py-3 text-paper sm:px-6">
+        <p className="truncate text-sm">{title}</p>
+        <div className="flex items-center gap-3">
           <button
             type="button"
             onClick={() => setZoomed((z) => !z)}
-            className="rounded-full border border-white/30 px-4 py-1.5 text-xs font-semibold transition-colors hover:bg-white/10"
+            className="border border-paper/40 px-4 py-1.5 text-xs transition-colors hover:bg-paper/10"
           >
             {zoomed ? "Sığdır" : "Yakınlaştır"}
           </button>
@@ -47,18 +45,15 @@ export default function Lightbox({
             aria-label="Kapat"
             onClick={onClose}
             autoFocus
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/30 text-lg transition-colors hover:bg-white/10"
+            className="flex h-9 w-9 items-center justify-center border border-paper/40 text-lg leading-none transition-colors hover:bg-paper/10"
           >
             ×
           </button>
         </div>
       </div>
-
       <div
         className="min-h-0 flex-1 overflow-auto p-4"
-        onClick={(e) => {
-          if (e.target === e.currentTarget) onClose();
-        }}
+        onClick={(e) => e.target === e.currentTarget && onClose()}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -66,8 +61,8 @@ export default function Lightbox({
           alt={title}
           className={
             zoomed
-              ? "mx-auto w-[220%] max-w-none rounded-lg bg-white sm:w-[160%]"
-              : "mx-auto max-w-full rounded-lg bg-white object-contain"
+              ? "mx-auto w-[230%] max-w-none bg-white sm:w-[165%]"
+              : "mx-auto max-w-full bg-white object-contain"
           }
           style={zoomed ? undefined : { maxHeight: "calc(100vh - 6.5rem)" }}
         />
