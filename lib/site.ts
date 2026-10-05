@@ -3,21 +3,16 @@
 export const SITE_URL = "https://armoni.mesbyyapi.com";
 export const SITE_NAME = "Armoni Evleri";
 
-// Ana şirket (Mesby Yapı) bilgileri.
-export const PARENT = {
-  name: "Mesby Yapı",
-  url: "https://www.mesbyyapi.com",
-};
+export const PARENT = { name: "Mesby Yapı", url: "https://www.mesbyyapi.com" };
 
-// Satış / iletişim bilgileri (Mesby Yapı ofisi).
+// Satış ofisi (Mesby Yapı). Adres: mesby-armoni.pdf kataloğundaki ile aynıdır.
 export const CONTACT = {
   phoneDisplay: "0 542 122 48 47",
   phoneHref: "tel:+905421224847",
   whatsappNumber: "905421224847",
   email: "info@mesbyyapi.com",
-  address: "Cevatpaşa, 100. Yıl Cd No:18, 34100 Bayrampaşa/İstanbul",
+  address: "Cevatpaşa Mahallesi, 100. Yıl Caddesi No:16, Bayrampaşa / İstanbul",
   workingHours: "Pazartesi - Cumartesi, 09:00 - 17:00",
-  instagram: "https://instagram.com/mesbyyapi",
 };
 
 export function whatsappLink(message: string) {
