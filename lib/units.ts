@@ -46,7 +46,11 @@ function unitType(
 }
 
 const normalImage = (id: TypeId) => `plans/normal/${id}-tip`;
-const roofImage = (id: TypeId) => `plans/roof/roof-${id}-tip`;
+// Çatı katı tip görsellerinde dosya adları D, E ve F için karışıktır: roof-D-tip.png aslında
+// E tipini (29. daire), roof-E-tip.png F tipini (30), roof-F-tip.png D tipini (28) gösterir.
+// Dosyaları yeniden adlandırmak yerine burada eşleştiriyoruz.
+const ROOF_IMAGE_FILE: Record<TypeId, TypeId> = { A: "A", B: "B", C: "C", D: "F", E: "D", F: "E" };
+const roofImage = (id: TypeId) => `plans/roof/roof-${ROOF_IMAGE_FILE[id]}-tip`;
 
 export const PLANS: Record<
   PlanKey,

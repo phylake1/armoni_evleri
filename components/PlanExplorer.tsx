@@ -54,13 +54,15 @@ export default function PlanExplorer({ images }: { images: Record<string, Img> }
 
   const data = PLANS[plan];
   const geo = GEOMETRY[plan];
-  const active = hover ?? selected;
+  // Bir tip seçiliyken vurgu hep o tiptir; hover yalnızca seçim yokken önizleme verir.
+  const active = selected ?? hover;
   const planImage = images[data.imageKey];
   const type = selected ? data.types.find((t) => t.id === selected)! : null;
   const typeImage = type ? images[type.imageKey] : undefined;
 
   function choose(id: TypeId | null) {
     setSelected(id);
+    if (!id) setHover(null);
     window.history.replaceState(null, "", id ? `#plan=${plan}-${id}` : "#kat-planlari");
     if (id && window.matchMedia("(max-width: 1023px)").matches) {
       panelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -163,8 +165,8 @@ export default function PlanExplorer({ images }: { images: Record<string, Img> }
                       aria-pressed={selected === id}
                       aria-label={`${id} tipi, ${t.layout}, net ${fmt(t.net)} metrekare`}
                       className="cursor-pointer outline-none"
-                      onMouseEnter={() => setHover(id)}
-                      onMouseLeave={() => setHover(null)}
+                      onPointerEnter={(e) => e.pointerType === "mouse" && setHover(id)}
+                      onPointerLeave={(e) => e.pointerType === "mouse" && setHover(null)}
                       onFocus={() => setHover(id)}
                       onBlur={() => setHover(null)}
                       onClick={() => choose(selected === id ? null : id)}
@@ -196,8 +198,8 @@ export default function PlanExplorer({ images }: { images: Record<string, Img> }
                       key={`badge-${id}`}
                       transform={`translate(${bx} ${by})`}
                       className="cursor-pointer"
-                      onMouseEnter={() => setHover(id)}
-                      onMouseLeave={() => setHover(null)}
+                      onPointerEnter={(e) => e.pointerType === "mouse" && setHover(id)}
+                      onPointerLeave={(e) => e.pointerType === "mouse" && setHover(null)}
                       onClick={() => choose(selected === id ? null : id)}
                     >
                       <circle
@@ -250,8 +252,8 @@ export default function PlanExplorer({ images }: { images: Record<string, Img> }
                         <button
                           type="button"
                           onClick={() => choose(t.id)}
-                          onMouseEnter={() => setHover(t.id)}
-                          onMouseLeave={() => setHover(null)}
+                          onPointerEnter={(e) => e.pointerType === "mouse" && setHover(t.id)}
+                          onPointerLeave={(e) => e.pointerType === "mouse" && setHover(null)}
                           className="flex w-full items-center gap-4 border-b border-stone py-4 text-left transition-colors hover:bg-linen"
                         >
                           <Badge id={t.id} active={hover === t.id} />
